@@ -10,10 +10,10 @@ class Clock:
     def get_hours(self):
         return dt.datetime.now().strftime("%I")
     
-    def get_hours(self):
+    def get_min(self):
         return dt.datetime.now().strftime("%M")
     
-    def get_hours(self):
+    def get_sec(self):
         return dt.datetime.now().strftime("%S")
     
     def time_change(self,time):
