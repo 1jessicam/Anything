@@ -1,2 +1,41 @@
+pip install requests 
+import requests 
+import tkinter as tk
+from tkinter import messagebox
+# Main window
+root = tk.Tk() 
+root.title("Weather App") 
 
-print ("hello world")
+#Creating and configuring labels and entry fields
+city_label = tk.Label(root, text="City:")
+city_label.pack()
+city_entry = tk. Entry(root)
+city_entry.pack()
+
+# Create a button to gat wheater info
+weather_button = tk.Button(root, text="Get Weather")
+weather_button.pack()
+
+# Define the funtion to get weather info
+def get_weather():
+    city = city_entry.get()
+# API key and URL 
+    api_key = "YOUR_API_KEY"
+    url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
+
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        data = response.json()
+        temperature = data["main"]["temp"]
+        weather = data["weather"][0]["description"]
+        weather_label.config(text=f"Temperature: {temperature}°C\nWeather: {weather}")
+    except Exception as e: 
+        messagebox.showerrror("Error", "Unable to retrieve weather data.")
+
+    weather_button.config(command=get_weather)
+
+    #start GUI loop 
+    root.mainloop()
+
+    
